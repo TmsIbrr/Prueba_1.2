@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+<script>
+    let cart = [];
+
+function addToCart() {
+    let itemSelect = document.getElementById('item');
+    let item = itemSelect.options[itemSelect.selectedIndex].text;
+    let cantidad = parseInt(document.getElementById('cantidad').value);
+    let precio = parseFloat(item.match(/\$([0-9]+\.?[0-9]*)/)[1]);
+
+    let carritoItem = {
+        nombre: item.split(' - ')[0],
+        precio: precio,
+        cantidad: cantidad
+    };
+
+    cart.push(carritoItem);
+    updateCart();
+}
+
+function updateCart() {
+    let cartDiv = document.getElementById('cart');
+    cartDiv.innerHTML = '';
+
+    let totalCost = 0;
+
+    cart.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.innerHTML = `
+            <span>${item.nombre} (x${item.cantidad}) - $${(item.precio * item.cantidad).toFixed(2)}</span>
+            <button onclick="removeFromCart(${index})">Eliminar</button>
+        `;
+        cartDiv.appendChild(itemDiv);
+
+        totalCost += item.precio * item.cantidad;
+    });
+
+    document.getElementById('total').textContent = totalCost.toFixed(2);
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+</script>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="carrito.html">Carrito</a></li>
+                <li><a href="colaboraciones.html">Colaboraciones</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <h2>Carrito</h2>
+    </header>
+    <section class="seccion">
+        <h2>Selecciona tu ropa deportiva</h2>
+        <form id="cart-form">
+            <label for="item">Tipo de ropa:</label>
+            <select id="item" name="item">
+                <option value="camiseta">Camiseta - $20</option>
+                <option value="pantalones">Pantalones - $30</option>
+                <option value="zapatillas">Zapatillas - $60</option>
+            </select>
+
+            <label for="cantidad">Cantidad:</label>
+            <select name="cantidad" id="cantidad">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <button type="button" onclick="addToCart()">Agregar al Carrito</button>
+        </form>
+    </section>
+    <section class="seccion">
+        <h2>Carrito de Compras</h2>
+        <div id="cart"></div>
+        <div id="total-cost">
+            <h3>Total: $<span id="total">0.00</span></h3>
+        </div>
+    </section>
+</body>
+</html>

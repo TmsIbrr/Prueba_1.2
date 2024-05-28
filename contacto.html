@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <script>
+        function Enviar() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var message = document.getElementById("message").value;
+    
+            if (name.trim() !== "" && email.trim() !== "" && message.trim() !== "") {
+                alert("Mensaje enviado. Te contactaremos en un plazo de 24 horas.");
+            } else {
+                alert("Por favor, completa todos los campos del formulario.");
+            }
+        }
+    </script>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="carrito.html">Carrito</a></li>
+                <li><a href="colaboraciones.html">Colaboraciones</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <h2>Contacto</h2>
+        </nav>
+    </header>
+    <section class="contact">
+        <h2>Contacto</h2>
+        <form id="contact-form">
+            <table>
+                <tr>
+            <td>* Nombre: </td><td><input type="text" id="name" name="name" required></td>
+        </tr>
+        <tr>
+            <td>* Email: </td><td><input type="email" id="email" name="email" required></td>
+        </tr>
+        <tr>
+            <td>* Mensaje:</td> <td><textarea id="message" name="message" required></textarea></td>
+        </tr>
+        <tr>
+            <td><button type="submit" onclick="Enviar()">Enviar</button></td>
+        </tr>
+        </table>
+        </form>
+    </section>
+</body>
+</html>
